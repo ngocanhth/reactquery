@@ -1,17 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import Header from './Header';
 
 function Post() {
     const fectApi = async () => {
     //  const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      const response = await axios.get(' http://localhost:3001/posts');
+      const response = await axios.get('http://localhost:3001/posts');
+      // console.log(response);
       return response.data;
     }
 
-  const { isError, isLoading, data, isFetching } = useQuery(['posts'], fectApi, {retry: 5, retryDelay: 1000, cacheTime: 10000})
+    const fectApi1 = async () => {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        return response.data;
+    }
+
+    // staleTime khoang thoi gian du lieu con moi
+
+    const results = useQueries({
+      queries: [
+        { queryKey: ['post', 1], queryFn: fectApi, staleTime: Infinity},
+        { queryKey: ['post', 2], queryFn: fectApi1, staleTime: Infinity}
+      ]
+    })
+
+    console.log("results: ", results);
+// retry: khi goi data bi loi se hoi lai so lan khai bao retry: 2 voi thoi gian moi lan: retryDelay: 1000 -> 1s
+ // const { isError, isLoading, data, isFetching } = useQuery(['posts'], fectApi, {retry: 5, retryDelay: 1000, cacheTime: 10000})
+  const { isError, isLoading, data, isFetching } = useQuery(['posts'], fectApi, { staleTime: 4000 })
 
   console.log("Check loading: ", { isLoading, isFetching });
 
@@ -24,7 +42,7 @@ function Post() {
 // console.log(data);
 
   return (
-    <div>
+    <div className='posts-list'>
           <ul>
             {
                 data?.map((post) => {

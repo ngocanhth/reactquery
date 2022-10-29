@@ -13,14 +13,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
-        <Routes>
-          <Route path="/" element = {<Home/>} />
-          <Route path="react-query"  element = {<Post/>} />
-          <Route path="react"  element = {<ReactPost/>} />
-        </Routes>
+          <Header />
+          <Routes>
+            <Route path="/" element = {<Home/>} />
+            <Route path="react-query"  element = {<Post/>} />
+            <Route path="react"  element = {<ReactPost/>} />
+          </Routes>
       </BrowserRouter>
-      <Post/>
     </div>
   );
 }

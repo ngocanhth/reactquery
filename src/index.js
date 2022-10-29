@@ -11,7 +11,6 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client = { new QueryClient() }>
       <App />
-
       <ReactQueryDevtools initialIsOpen = {false} position = 'bottom-right' />
     </QueryClientProvider>
   </React.StrictMode>

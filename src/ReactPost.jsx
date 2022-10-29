@@ -18,7 +18,7 @@ const ReactPost = () => {
     if (!posts.length) return <div>Loading...</div>
 
   return (
-    <div>
+    <div className='react-post'>
         <ul>
             {
                 posts?.map(post => {
