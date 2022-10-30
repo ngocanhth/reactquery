@@ -42,7 +42,7 @@ function Post() {
  // const { isError, isLoading, data, isFetching } = useQuery(['posts'], fectApi, {retry: 5, retryDelay: 1000, cacheTime: 10000})
  //  const { isError, isLoading, data } = useQuery(['posts'], fectApi, { staleTime: 4000 })
       
- const { isError, isLoading, data } = useQuery(['posts', userId ], fectUserDetail, { enabled: !!userId })
+ const { isError, isLoading, isFetching, data } = useQuery(['posts', userId ], fectUserDetail, { enabled: !!userId })
       console.log(data);
 
       // console.log("Check loading: ", { isLoading, isFetching });
@@ -50,7 +50,7 @@ function Post() {
       // neu co loi co goi lai 1 lan moi lan 1s roi moi tra ve loi
       // retry: 5, retryDelay: 1000
 
-   //   if (isLoading) return <div> Loading React query...</div>
+     if (isFetching) return <div> Loading React query...</div>
 
       if (isError) return <div> error </div>
 
